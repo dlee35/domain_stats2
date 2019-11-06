@@ -128,7 +128,7 @@ def should_item_be_cached(cache_item):
 def add_to_database( domain, seen_by_web, seen_by_us, seen_by_you, rank, other ):
     database_lock.acquire()
     try:
-        db = sqlite3.connect("domain_stats.db")
+        db = sqlite3.connect(config.database_file)
         cursor = db.cursor()
         sql = "insert into domains (domain,seen_by_web, seen_by_us, seen_by_you, rank, other) values (?,?,?,?,?,?)"
         result = cursor.execute(sql, (domain, seen_by_web, seen_by_us, seen_by_you, rank, other) )
